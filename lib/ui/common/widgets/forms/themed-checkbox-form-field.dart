@@ -28,26 +28,35 @@ class ThemedCheckboxFormField extends StatefulWidget {
 
 class ThemedCheckboxFormFieldState extends State<ThemedCheckboxFormField> {
   Map<String, bool> values = {
-    'Item1': true,
+    'Item1': false,
     'Item2': false,
   };
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        children: values.keys.map((String key) {
-          return CheckboxListTile(
-            title: Text(key),
-            value: values[key],
-            onChanged: (bool value) {
-              setState(() {
-                values[key] = value;
-              });
-            },
-          );
-        }).toList(),
-      ),
+    ThemeData themeData = Theme.of(context);
+    return Column(
+      children: <Widget>[
+        SizedBox(
+          height: 400.0,
+          child: ListView(
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+            children: values.keys.map((String key) {
+              return CheckboxListTile(
+                title: Text(key,
+                    style: themeData.textTheme.headline6,
+                    textAlign: TextAlign.center),
+                value: values[key],
+                onChanged: (bool value) {
+                  setState(() {
+                    values[key] = value;
+                  });
+                },
+              );
+            }).toList(),
+          ),
+        ),
+      ],
     );
   }
 }

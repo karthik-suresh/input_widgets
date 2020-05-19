@@ -34,6 +34,7 @@ class _ThemedDropdownFormFieldState extends State<ThemedDropdownFormField> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData themeData = Theme.of(context);
     return DropdownButton<String>(
       value: dropdownValue,
       icon: Icon(Icons.arrow_downward),
@@ -53,7 +54,8 @@ class _ThemedDropdownFormFieldState extends State<ThemedDropdownFormField> {
           .map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
-          child: Text(value),
+          child: Text(value,
+              style: themeData.textTheme.headline6, textAlign: TextAlign.left),
         );
       }).toList(),
     );

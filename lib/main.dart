@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:input_widgets/my_widget.dart';
+import 'package:input_widgets/controller/single_role_classifier.dart';
 import 'package:input_widgets/ui/common/themes/influenzanet-theme.dart';
 import 'package:input_widgets/ui/common/widgets/app-bars/themed-app-bar.dart';
 import 'package:input_widgets/ui/common/widgets/buttons/themed-primary-button.dart';
@@ -9,7 +9,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,12 +23,36 @@ class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
   final String title;
-  final List<String> questions = [
-    'What is your main activity?',
-    'What is the first part of your school/college/workplace postal code (where you spend the majority of your working/studying time)?',
-    'Which of the following texts most closely matches with your main occupation?',
-    'Except people you meet on public contact, do you have contact with any of the following during the course of a typical day?',
-    'INCLUDING YOU, how many people in each of the following age groups live in your household?'
+  final questionItems = [
+    {
+      'question': 'What is your main activity?',
+      'role': 'title',
+      'answer': 'input'
+    },
+    {
+      'question':
+          'What is the first part of your school/college/workplace postal code (where you spend the majority of your working/studying time)?',
+      'role': 'title',
+      'answer': 'singleChoiceGroup'
+    },
+    {
+      'question':
+          'Which of the following texts most closely matches with your main occupation?',
+      'role': 'title',
+      'answer': 'multipleChoiceGroup'
+    },
+    {
+      'question':
+          'Except people you meet on public contact, do you have contact with any of the following during the course of a typical day?',
+      'role': 'title',
+      'answer': 'numberInput'
+    },
+    {
+      'question':
+          'INCLUDING YOU, how many people in each of the following age groups live in your household?',
+      'role': 'title',
+      'answer': 'dropdownChoiceGroup'
+    }
   ];
 
   @override
@@ -38,10 +61,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _index = 0;
-  List<String> questions;
+  dynamic questions;
   @override
   void initState() {
-    questions = widget.questions;
+    questions = widget.questionItems;
     super.initState();
   }
 
@@ -56,29 +79,29 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData themeData = Theme.of(context);
     return Scaffold(
       appBar: ThemedAppBar(Theme.of(context), titleText: widget.title),
       body: Column(
         children: <Widget>[
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: ThemeElements.pagePadding,
-                  top: ThemeElements.pagePadding,
-                  right: ThemeElements.pagePadding,
-                ),
-                child: MyWidget(question: questions[_index]),
-              ),
-              Container(height: ThemeElements.elementPadding),
-              ThemedPrimaryButton(
-                Theme.of(context),
-                primaryColor: true,
-                text: 'Next',
-                onPressed: _nextQuestion,
-              )
-            ],
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Text(
+              questions[_index]['question'],
+              style: themeData.textTheme.headline6,
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: SingleRoleClassifier.classify(questions[_index]['answer']),
+          ),
+          Container(height: ThemeElements.elementPadding),
+          ThemedPrimaryButton(
+            Theme.of(context),
+            primaryColor: true,
+            text: 'Next',
+            onPressed: _nextQuestion,
           )
         ],
       ),
