@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:input_widgets/answer_widget.dart';
 import 'package:input_widgets/ui/common/themes/influenzanet-theme.dart';
 import 'package:input_widgets/ui/common/widgets/cards/themed-card.dart';
-import 'package:input_widgets/ui/common/widgets/forms/themed-long-text-form-field.dart';
 
 class MyWidget extends StatelessWidget {
   final String question;
@@ -27,16 +27,13 @@ class MyWidget extends StatelessWidget {
           children: <Widget>[
             Text(
               question,
-              style: themeData.textTheme.headline5,
+              style: themeData.textTheme.headline6,
               textAlign: TextAlign.center,
             ),
             Container(
               height: ThemeElements.cardContentPadding,
             ),
-            ThemedLongTextFormField(
-              hintText: "Answer here",
-              maxlines: 5,
-            ),
+            AnswerWidget(),
           ],
         ),
       ),
