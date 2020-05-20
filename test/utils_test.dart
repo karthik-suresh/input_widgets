@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:input_widgets/models/flattened_rendered.dart';
 import 'package:input_widgets/utils/utils.dart';
 import 'package:test/test.dart';
 
@@ -77,6 +78,27 @@ void main() {
       expect(
           Utils.getItemComponentContentByRole(components, "text", code: 'de'),
           'Wählen Sie alle entsprechenden Optionen aus, falls diese zutreffen');
+    });
+  });
+
+  group('Get questions from a list of Survey Single Items :\n', () {
+    dynamic surveySingleItem;
+
+    setUp(() {
+      surveySingleItem = qp;
+      print("Components=\n");
+      print(json.encode(surveySingleItem));
+    });
+    test('Check if all questions are fetched appropriately in a list', () {
+      List<String> expected = [
+        'What is your main activity?',
+        'Except people you meet on public contact, do you have contact with any of the following during the course of a typical day?',
+        'Except people you meet on public contact, do you have contact with any of the following during the course of a typical day?',
+        'INCLUDING YOU, how many people in each of the following age groups live in your household?'
+      ];
+
+      expect(json.encode(Utils.getQuestionList(surveySingleItem)),
+          json.encode(expected));
     });
   });
 }

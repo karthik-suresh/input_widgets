@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:input_widgets/controller/single_role_classifier.dart';
+import 'package:input_widgets/models/flattened_rendered.dart';
 import 'package:input_widgets/ui/common/themes/influenzanet-theme.dart';
 import 'package:input_widgets/ui/common/widgets/app-bars/themed-app-bar.dart';
 import 'package:input_widgets/ui/common/widgets/buttons/themed-primary-button.dart';
 import 'package:input_widgets/ui/survey/question.dart';
+import 'package:input_widgets/utils/utils.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,37 +25,7 @@ class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
   final String title;
-  final questionItems = [
-    {
-      'question': 'What is your main activity?',
-      'role': 'title',
-      'answer': 'input'
-    },
-    {
-      'question':
-          'What is the first part of your school/college/workplace postal code (where you spend the majority of your working/studying time)?',
-      'role': 'title',
-      'answer': 'singleChoiceGroup'
-    },
-    {
-      'question':
-          'Which of the following texts most closely matches with your main occupation?',
-      'role': 'title',
-      'answer': 'multipleChoiceGroup'
-    },
-    {
-      'question':
-          'Except people you meet on public contact, do you have contact with any of the following during the course of a typical day?',
-      'role': 'title',
-      'answer': 'numberInput'
-    },
-    {
-      'question':
-          'INCLUDING YOU, how many people in each of the following age groups live in your household?',
-      'role': 'title',
-      'answer': 'dropdownChoiceGroup'
-    }
-  ];
+  final questionItems = Utils.getQuestionList(qp);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -88,12 +59,12 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Container(
               padding: const EdgeInsets.all(12.0),
-              child: Question(question: questions[_index]['question']),
+              child: Question(question: questions[_index]),
             ),
-            Container(
-              padding: const EdgeInsets.all(12.0),
-              child: SingleRoleClassifier.classify(questions[_index]['answer']),
-            ),
+            // Container(
+            //   padding: const EdgeInsets.all(12.0),
+            //   child: SingleRoleClassifier.classify(questions[_index]['answer']),
+            // ),
             Container(height: ThemeElements.elementPadding),
             ThemedPrimaryButton(
               Theme.of(context),

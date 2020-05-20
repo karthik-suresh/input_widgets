@@ -18,7 +18,7 @@ class Utils {
     getPartsByCode(content, "en");
   }
 
-  static getPartsByCode(List content, String code) {
+  static getPartsByCode(dynamic content, String code) {
     dynamic localisedObject = content.firstWhere(
         (localizedObject) => localizedObject['code'] == code, orElse: () {
       print('No content found');
@@ -30,7 +30,7 @@ class Utils {
     return parts;
   }
 
-  static getItemComponentContentByRole(List itemComponents, String role,
+  static getItemComponentContentByRole(dynamic itemComponents, String role,
       {String code = "en"}) {
     dynamic component = itemComponents
         .firstWhere((comp) => comp['role'] == role, orElse: () => null);
@@ -40,5 +40,15 @@ class Utils {
       return null;
     }
     return getPartsByCode(component['content'], code);
+  }
+
+  static getQuestionList(List surveySingleItem) {
+    List<String> questions = [];
+    surveySingleItem.forEach((item) {
+      String question =
+          getItemComponentContentByRole(item['components']['items'], 'title');
+      questions.add(question);
+    });
+    return questions;
   }
 }
