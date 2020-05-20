@@ -82,28 +82,31 @@ class _MyHomePageState extends State<MyHomePage> {
     ThemeData themeData = Theme.of(context);
     return Scaffold(
       appBar: ThemedAppBar(Theme.of(context), titleText: widget.title),
-      body: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Text(
-              questions[_index]['question'],
-              style: themeData.textTheme.headline6,
-              textAlign: TextAlign.center,
+      body: Container(
+        padding: EdgeInsets.all(ThemeElements.cardContentPadding),
+        child: Column(
+          children: <Widget>[
+            Container(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                questions[_index]['question'],
+                style: themeData.textTheme.headline6,
+                textAlign: TextAlign.left,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: SingleRoleClassifier.classify(questions[_index]['answer']),
-          ),
-          Container(height: ThemeElements.elementPadding),
-          ThemedPrimaryButton(
-            Theme.of(context),
-            primaryColor: true,
-            text: 'Next',
-            onPressed: _nextQuestion,
-          )
-        ],
+            Container(
+              padding: const EdgeInsets.all(12.0),
+              child: SingleRoleClassifier.classify(questions[_index]['answer']),
+            ),
+            Container(height: ThemeElements.elementPadding),
+            ThemedPrimaryButton(
+              Theme.of(context),
+              primaryColor: true,
+              text: 'Next',
+              onPressed: _nextQuestion,
+            )
+          ],
+        ),
       ),
     );
   }
