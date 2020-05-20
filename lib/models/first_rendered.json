@@ -1,4 +1,4 @@
-const qp={
+{
     "key": "0",
     "version": 1,
     "items": [
@@ -1064,4 +1064,4 @@ const qp={
             ]
         }
     ]
-};
+}
