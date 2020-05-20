@@ -13,4 +13,16 @@ class Utils {
     }
     return flatRenderedList.toList();
   }
+
+  static getEnglishPartsFromContent(dynamic content) {
+    getPartsByCode(content, "en");
+  }
+
+  static getPartsByCode(dynamic content, String code) {
+    dynamic localisedObject = content
+        .where((localizedObject) => localizedObject['code'] == code)
+        .toList();
+    String parts = localisedObject[0]['parts'].join();
+    return parts;
+  }
 }
