@@ -3,6 +3,7 @@ import 'package:input_widgets/controller/single_role_classifier.dart';
 import 'package:input_widgets/ui/common/themes/influenzanet-theme.dart';
 import 'package:input_widgets/ui/common/widgets/app-bars/themed-app-bar.dart';
 import 'package:input_widgets/ui/common/widgets/buttons/themed-primary-button.dart';
+import 'package:input_widgets/ui/survey/question.dart';
 
 void main() {
   runApp(MyApp());
@@ -79,7 +80,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData themeData = Theme.of(context);
     return Scaffold(
       appBar: ThemedAppBar(Theme.of(context), titleText: widget.title),
       body: Container(
@@ -88,11 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Container(
               padding: const EdgeInsets.all(12.0),
-              child: Text(
-                questions[_index]['question'],
-                style: themeData.textTheme.headline6,
-                textAlign: TextAlign.left,
-              ),
+              child: Question(question: questions[_index]['question']),
             ),
             Container(
               padding: const EdgeInsets.all(12.0),
