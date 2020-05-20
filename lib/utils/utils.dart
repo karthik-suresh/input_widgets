@@ -14,15 +14,31 @@ class Utils {
     return flatRenderedList.toList();
   }
 
-  static getEnglishPartsFromContent(dynamic content) {
+  static getEnglishPartsFromContent(List content) {
     getPartsByCode(content, "en");
   }
 
-  static getPartsByCode(dynamic content, String code) {
-    dynamic localisedObject = content
-        .where((localizedObject) => localizedObject['code'] == code)
-        .toList();
-    String parts = localisedObject[0]['parts'].join();
+  static getPartsByCode(List content, String code) {
+    dynamic localisedObject = content.firstWhere(
+        (localizedObject) => localizedObject['code'] == code, orElse: () {
+      print('No content found');
+      return null;
+    });
+    String parts = (localisedObject == null)
+        ? 'No content found'
+        : localisedObject['parts'].join();
     return parts;
+  }
+
+  static getItemComponentContentByRole(List itemComponents, String role,
+      {String code = "en"}) {
+    dynamic component = itemComponents
+        .firstWhere((comp) => comp['role'] == role, orElse: () => null);
+    if (component == null ||
+        ((component['displayCondition'] != null) &&
+            (component['displayCondition'] == false))) {
+      return null;
+    }
+    return getPartsByCode(component['content'], code);
   }
 }
