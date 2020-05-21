@@ -52,7 +52,18 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ThemedAppBar(Theme.of(context), titleText: widget.title),
+      appBar: ThemedAppBar(
+        Theme.of(context),
+        titleText: widget.title,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.help),
+            onPressed: () async {
+              return null;
+            },
+          )
+        ],
+      ),
       body: Container(
         padding: EdgeInsets.all(ThemeElements.cardContentPadding),
         child: Column(
