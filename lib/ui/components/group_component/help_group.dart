@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:input_widgets/utils/widget_utils.dart';
 
 void main() => runApp(MyApp());
 const String _title = 'Flutter Code Sample';
@@ -9,12 +10,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: _title, home: Home());
+    return MaterialApp(title: _title, home: HelpGroup());
   }
 }
 
-class Home extends StatelessWidget {
-  const Home({Key key}) : super(key: key);
+class HelpGroup extends StatelessWidget {
+  const HelpGroup({Key key}) : super(key: key);
   static const title = "Question asked?";
   static List<String> textList = ['Text1', 'Text2'];
   @override
@@ -26,7 +27,7 @@ class Home extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.help),
             onPressed: () async {
-              _showHelpGroup(context);
+              _showHelpGroup(context, title: title, textList: textList);
             },
           )
         ],
@@ -37,7 +38,7 @@ class Home extends StatelessWidget {
             color: Colors.yellow,
             child: Text('Here'),
             onPressed: () async {
-              _showHelpGroup(context);
+              _showHelpGroup(context, title: title, textList: textList);
             },
           ),
         ),
@@ -52,18 +53,15 @@ class Home extends StatelessWidget {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('title'),
+          title: Text(title),
           content: SingleChildScrollView(
             child: ListBody(
-              children: <Widget>[
-                Text(title),
-                Text('Would you like to approve of this message?'),
-              ],
+              children: WidgetUtils.listOfTexts(textList),
             ),
           ),
           actions: <Widget>[
             FlatButton(
-              child: Text('Approve'),
+              child: Text('OK'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
