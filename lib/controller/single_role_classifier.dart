@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:input_widgets/answer_widget.dart';
 import 'package:input_widgets/ui/common/widgets/forms/themed-checkbox-form-field.dart';
 import 'package:input_widgets/ui/common/widgets/forms/themed-dropdown-form-field.dart';
 import 'package:input_widgets/ui/common/widgets/forms/themed-long-text-form-field.dart';
@@ -42,7 +41,10 @@ class SingleRoleClassifier {
         return ThemedDropdownFormField();
         break;
       default:
-        return AnswerWidget();
+        return ThemedLongTextFormField(
+          hintText: "Answer here",
+          maxlines: 5,
+        );
     }
   }
 }
