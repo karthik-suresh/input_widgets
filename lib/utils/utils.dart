@@ -14,35 +14,7 @@ class Utils {
     return flatRenderedList.toList();
   }
 
-  static getEnglishPartsFromContent(List content) {
-    getPartsByCode(content, code: "en");
-  }
-
-  static getPartsByCode(dynamic content, {String code = "en"}) {
-    dynamic localisedObject = content.firstWhere(
-        (localizedObject) => localizedObject['code'] == code, orElse: () {
-      print('No content found');
-      return null;
-    });
-    String parts = (localisedObject == null)
-        ? 'No content found'
-        : localisedObject['parts'].join();
-    return parts;
-  }
-
-  static getItemComponentContentByRole(dynamic itemComponents, String role,
-      {String code = "en"}) {
-    dynamic component = itemComponents
-        .firstWhere((comp) => comp['role'] == role, orElse: () => null);
-    if (component == null ||
-        ((component['displayCondition'] != null) &&
-            (component['displayCondition'] == false))) {
-      return null;
-    }
-    return getPartsByCode(component['content'], code: code);
-  }
-
-  static getItemGroupByRole(dynamic itemComponents, String role,
+  static getSingleItemComponentsByRole(dynamic itemComponents, String role,
       {String code = "en"}) {
     dynamic component = itemComponents
         .firstWhere((comp) => comp['role'] == role, orElse: () => null);
@@ -54,18 +26,7 @@ class Utils {
     return component;
   }
 
-  static getQuestionList(List surveySingleItem, {String code = "en"}) {
-    List<String> questions = [];
-    surveySingleItem.forEach((item) {
-      String question = getItemComponentContentByRole(
-          item['components']['items'], 'title',
-          code: code);
-      questions.add(question);
-    });
-    return questions;
-  }
-
-  static getItemComponentsByRole(List itemComponents, String role,
+  static getListItemComponentsByRole(List itemComponents, String role,
       {String code = "en"}) {
     if (itemComponents == null) {
       return null;
@@ -82,6 +43,40 @@ class Utils {
     return components;
   }
 
+  static getContent(dynamic itemComponents, {String code = "en"}) {
+    dynamic localisedObject = itemComponents['content'].firstWhere(
+        (localizedObject) => localizedObject['code'] == code, orElse: () {
+      print('No content found');
+      return null;
+    });
+    String parts = (localisedObject == null)
+        ? 'No content found'
+        : localisedObject['parts'].join();
+    return parts;
+  }
+
+  static getPartsByCode(dynamic content, {String code = "en"}) {
+    dynamic localisedObject = content.firstWhere(
+        (localizedObject) => localizedObject['code'] == code, orElse: () {
+      print('No content found');
+      return null;
+    });
+    String parts = (localisedObject == null)
+        ? 'No content found'
+        : localisedObject['parts'].join();
+    return parts;
+  }
+
+  // static getQuestionList(List surveySingleItem, {String code = "en"}) {
+  //   List<String> questions = [];
+  //   surveySingleItem.forEach((item) {
+  //     String question =
+  //         getContentByRole(item['components']['items'], 'title', code: code);
+  //     questions.add(question);
+  //   });
+  //   return questions;
+  // }
+
   static getContentListByRole(List itemComponents, String role,
       {String code = "en"}) {
     List<String> contentList = [];
@@ -89,7 +84,7 @@ class Utils {
       return null;
     }
     List componentsByRole =
-        getItemComponentsByRole(itemComponents, role, code: code);
+        getListItemComponentsByRole(itemComponents, role, code: code);
     componentsByRole.forEach((component) {
       contentList.add(getPartsByCode(component['content'], code: code));
     });
@@ -103,8 +98,8 @@ class Utils {
   static getHelpGroupList(List surveySingleItem, {String code = "en"}) {
     List<List<String>> helpList = [];
     surveySingleItem.forEach((question) {
-      dynamic helpGroup =
-          getItemGroupByRole(question['components']['items'], 'helpGroup');
+      dynamic helpGroup = getSingleItemComponentsByRole(
+          question['components']['items'], 'helpGroup');
       List<String> contents = getHelpGroupContents(helpGroup['items']);
       helpList.add(contents);
       print('here');

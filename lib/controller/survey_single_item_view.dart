@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:input_widgets/models/flattened_rendered.dart';
 import 'package:input_widgets/ui/common/widgets/app-bars/themed-app-bar.dart';
 import 'package:input_widgets/ui/common/widgets/buttons/themed-primary-button.dart';
 import 'package:input_widgets/ui/survey/question.dart';
+import 'package:input_widgets/utils/utils.dart';
 
 class SurveySingleItem extends StatefulWidget {
   SurveySingleItem({Key key, this.title}) : super(key: key);
 
   final String title;
-  final surveySingleItem = {};
+  final surveySingleItem = qp[0];
 
   @override
   _SurveySingleItemState createState() => _SurveySingleItemState();
@@ -15,10 +17,16 @@ class SurveySingleItem extends StatefulWidget {
 
 class _SurveySingleItemState extends State<SurveySingleItem> {
   dynamic surveySingleItem;
+  dynamic question;
+  dynamic helpGroup;
   final _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     surveySingleItem = widget.surveySingleItem;
+    question = Utils.getSingleItemComponentsByRole(
+        surveySingleItem['components']['items'], 'title');
+    helpGroup = Utils.getSingleItemComponentsByRole(
+        surveySingleItem['components']['items'], 'helpGroup');
     super.initState();
   }
 
@@ -32,7 +40,7 @@ class _SurveySingleItemState extends State<SurveySingleItem> {
           IconButton(
             icon: Icon(Icons.help),
             onPressed: () async {
-              _showHelpGroup(context);
+              _showHelpGroup(context, helpGroup: helpGroup);
             },
           )
         ],
@@ -50,13 +58,11 @@ class _SurveySingleItemState extends State<SurveySingleItem> {
                 children: <Widget>[
                   Container(
                     padding: const EdgeInsets.all(12.0),
-                    child: Question(
-                        question:
-                            'Title goes here with something present in the question'),
+                    child: Question(questionComponent: question),
                   ),
                   Container(
                     padding: const EdgeInsets.all(12.0),
-                    child: Question(question: 'ResponseGroup flows here'),
+                    child: Text('ResponseGroup flows here'),
                   ),
                   Container(
                     padding: const EdgeInsets.all(12.0),
@@ -104,8 +110,13 @@ class _SurveySingleItemState extends State<SurveySingleItem> {
     );
   }
 
-  Future<void> _showHelpGroup(context,
-      {String title = "Content goes here", List<String> textList}) async {
+  Future<void> _showHelpGroup(
+    context, {
+    dynamic helpGroup,
+  }) async {
+    dynamic textList =
+        Utils.getListItemComponentsByRole(helpGroup['items'], 'text');
+
     return showDialog<void>(
       context: context,
       barrierDismissible: false,
@@ -117,9 +128,7 @@ class _SurveySingleItemState extends State<SurveySingleItem> {
           ),
           content: SingleChildScrollView(
             child: ListBody(
-              children: <Widget>[
-                Text(title),
-              ],
+              children: helpItemsWidget(textList),
             ),
           ),
           actions: <Widget>[
@@ -133,5 +142,15 @@ class _SurveySingleItemState extends State<SurveySingleItem> {
         );
       },
     );
+  }
+
+  List<Widget> helpItemsWidget(List itemList) {
+    List<Widget> result = [];
+    itemList.forEach((item) {
+      String helpText = Utils.getContent(item);
+      result.add(Text(helpText));
+      result.add(Text(''));
+    });
+    return result;
   }
 }
