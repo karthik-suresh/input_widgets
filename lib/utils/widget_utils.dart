@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:input_widgets/ui/components/display_component/error_item.dart';
+import 'package:input_widgets/ui/components/display_component/text_item.dart';
+import 'package:input_widgets/ui/components/display_component/warning_item.dart';
 
 class WidgetUtils {
   static Widget classify(dynamic itemComponent) {
-    debugPrint("Item component==" + itemComponent.toString());
     switch (itemComponent['role']) {
       case 'title':
         return null;
@@ -18,18 +20,18 @@ class WidgetUtils {
       case 'text':
         return Container(
           padding: const EdgeInsets.all(6.0),
-          child: Text('Text flows here'),
+          child: TextItem(text: 'Text flows here'),
         );
       case 'error':
         return Container(
           padding: const EdgeInsets.all(6.0),
-          child: Text('Error flows here'),
+          child: ErrorItem(text: 'Error flows here'),
         );
         break;
       case 'warning':
         return Container(
           padding: const EdgeInsets.all(6.0),
-          child: Text('Warning flows here'),
+          child: WarningItem(text: 'Warning flows here'),
         );
         break;
       default:

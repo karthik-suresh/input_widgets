@@ -6,6 +6,6 @@ class WarningItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(this.text, style: TextStyle(color: Colors.yellow));
+    return Text(this.text, style: TextStyle(color: Colors.orange));
   }
 }
