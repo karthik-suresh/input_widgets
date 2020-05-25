@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:input_widgets/models/flattened_rendered.dart';
 import 'package:input_widgets/ui/common/widgets/app-bars/themed-app-bar.dart';
 import 'package:input_widgets/ui/common/widgets/buttons/themed-primary-button.dart';
+import 'package:input_widgets/ui/survey/body_component.dart';
 import 'package:input_widgets/ui/survey/question.dart';
 import 'package:input_widgets/utils/utils.dart';
 
@@ -9,7 +10,7 @@ class SurveySingleItem extends StatefulWidget {
   SurveySingleItem({Key key, this.title}) : super(key: key);
 
   final String title;
-  final surveySingleItem = qp[0];
+  final surveySingleItem = qp[1];
 
   @override
   _SurveySingleItemState createState() => _SurveySingleItemState();
@@ -19,6 +20,7 @@ class _SurveySingleItemState extends State<SurveySingleItem> {
   dynamic surveySingleItem;
   dynamic question;
   dynamic helpGroup;
+  dynamic bodyComponent;
   final _formKey = GlobalKey<FormState>();
   @override
   void initState() {
@@ -27,87 +29,8 @@ class _SurveySingleItemState extends State<SurveySingleItem> {
         surveySingleItem['components']['items'], 'title');
     helpGroup = Utils.getSingleItemComponentsByRole(
         surveySingleItem['components']['items'], 'helpGroup');
+    bodyComponent = surveySingleItem['components']['items'];
     super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: ThemedAppBar(
-        Theme.of(context),
-        titleText: widget.title,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.help),
-            onPressed: () async {
-              _showHelpGroup(context, helpGroup: helpGroup);
-            },
-          )
-        ],
-      ),
-      body: Form(
-        key: _formKey,
-        child: Container(
-          padding: const EdgeInsets.all(8.0),
-          child: Center(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Question(questionComponent: question),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text('ResponseGroup flows here'),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Visibility(
-                        visible: true,
-                        child: Text(
-                            'Other text goes here  if not present becomes invisible')),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Visibility(
-                        visible: true,
-                        child: Text(
-                            'Warning text goes here if not present becomes invisible')),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Visibility(
-                        visible: true,
-                        child: Text(
-                            'Error text goes here  if not present becomes invisible')),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Builder(
-                      builder: (context) => ThemedPrimaryButton(
-                        Theme.of(context),
-                        primaryColor: true,
-                        text: 'Next',
-                        onPressed: () {
-                          if (_formKey.currentState.validate()) {
-                            Scaffold.of(context).showSnackBar(SnackBar(
-                                content: Text('Fetching next Survey Item')));
-                          }
-                        },
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
   }
 
   Future<void> _showHelpGroup(
@@ -152,5 +75,61 @@ class _SurveySingleItemState extends State<SurveySingleItem> {
       result.add(Text(''));
     });
     return result;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: ThemedAppBar(
+        Theme.of(context),
+        titleText: widget.title,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.help),
+            onPressed: () async {
+              _showHelpGroup(context, helpGroup: helpGroup);
+            },
+          )
+        ],
+      ),
+      body: Form(
+        key: _formKey,
+        child: Container(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Question(questionComponent: question),
+                  ),
+                  Body(bodyComponent: bodyComponent),
+                  Container(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Builder(
+                      builder: (context) => ThemedPrimaryButton(
+                        Theme.of(context),
+                        primaryColor: true,
+                        text: 'Next',
+                        onPressed: () {
+                          if (_formKey.currentState.validate()) {
+                            Scaffold.of(context).showSnackBar(SnackBar(
+                                content: Text('Fetching next Survey Item')));
+                          }
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
