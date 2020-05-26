@@ -5,6 +5,7 @@ import 'package:input_widgets/ui/components/display_component/warning_item.dart'
 import 'package:input_widgets/ui/components/group_component/response_group.dart';
 import 'package:input_widgets/ui/components/response_component/input.dart';
 import 'package:input_widgets/ui/components/response_component/multiline_input.dart';
+import 'package:input_widgets/ui/components/response_component/multiple_choice_group.dart';
 import 'package:input_widgets/ui/components/response_component/number_input.dart';
 import 'package:input_widgets/ui/components/response_component/single_choice_group.dart';
 import 'package:input_widgets/utils/utils.dart';
@@ -67,7 +68,8 @@ class WidgetUtils {
       case 'multipleChoiceGroup':
         return Container(
             padding: const EdgeInsets.all(2.0),
-            child: Text('Multiple choice flows here'));
+            child: MultipleChoiceGroup(
+                multipleChoiceGroupComponent: responseComponent));
       case 'dropdownChoiceGroup':
         return Container(
             padding: const EdgeInsets.all(2.0),
@@ -87,6 +89,19 @@ class WidgetUtils {
         return Input(hintText: Utils.getContent(choiceComponent));
       case 'numberInput':
         return NumberInput(hintText: Utils.getContent(choiceComponent));
+      default:
+        debugPrint('Invalid or not implemented response component');
+        return null;
+    }
+  }
+
+  static Widget classifyMultipleChoiceGroupComponent(dynamic choiceComponent) {
+    switch (choiceComponent['role']) {
+      case 'option':
+        return Text(Utils.getContent(choiceComponent),
+            textAlign: TextAlign.left);
+      case 'input':
+        return Input(hintText: Utils.getContent(choiceComponent));
       default:
         debugPrint('Invalid or not implemented response component');
         return null;
