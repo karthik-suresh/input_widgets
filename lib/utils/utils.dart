@@ -44,6 +44,9 @@ class Utils {
   }
 
   static getContent(dynamic itemComponents, {String code = "en"}) {
+    if (itemComponents == null) {
+      return null;
+    }
     dynamic localisedObject = itemComponents['content'].firstWhere(
         (localizedObject) => localizedObject['code'] == code, orElse: () {
       print('No content found');

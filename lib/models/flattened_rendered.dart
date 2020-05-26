@@ -228,6 +228,20 @@ const qp = [
                 }
               ],
               "order": {"name": "sequential"}
+            },
+            {
+              "role": "input",
+              "content": [
+                {
+                  "code": "en",
+                  "parts": ["Other: "]
+                },
+                {
+                  "code": "de",
+                  "parts": ["Andere:"]
+                }
+              ],
+              "key": "1.1.0"
             }
           ],
           "order": {"name": "sequential"}

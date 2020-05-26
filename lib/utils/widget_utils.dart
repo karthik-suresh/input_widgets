@@ -3,6 +3,10 @@ import 'package:input_widgets/ui/components/display_component/error_item.dart';
 import 'package:input_widgets/ui/components/display_component/text_item.dart';
 import 'package:input_widgets/ui/components/display_component/warning_item.dart';
 import 'package:input_widgets/ui/components/group_component/response_group.dart';
+import 'package:input_widgets/ui/components/response_component/themed-long-text-form-field.dart';
+import 'package:input_widgets/ui/components/response_component/themed-number-form-field.dart';
+import 'package:input_widgets/ui/components/response_component/themed-text-form-field.dart';
+import 'package:input_widgets/utils/utils.dart';
 
 class WidgetUtils {
   static Widget classifyRootComponent(dynamic itemComponent) {
@@ -42,21 +46,32 @@ class WidgetUtils {
   static Widget classifyResponseComponent(dynamic responseComponent) {
     switch (responseComponent['role']) {
       case 'input':
-        return Text('Input flows here');
-
+        return Container(
+            padding: const EdgeInsets.all(2.0),
+            child: ThemedTextFormField(
+                hintText: Utils.getContent(responseComponent)));
       case 'multilineTextInput':
-        return Text('Long Input flows here');
-
+        return Container(
+            padding: const EdgeInsets.all(2.0),
+            child: ThemedLongTextFormField(
+                hintText: Utils.getContent(responseComponent)));
       case 'numberInput':
-        return Text('Number Input flows here');
-
+        return Container(
+            padding: const EdgeInsets.all(2.0),
+            child: ThemedNumberFormField(
+                hintText: Utils.getContent(responseComponent)));
       case 'singleChoiceGroup':
-        return Text('Single choice flows here');
-
+        return Container(
+            padding: const EdgeInsets.all(2.0),
+            child: Text('Single choice flows here'));
       case 'multipleChoiceGroup':
-        return Text('Multiple choice flows here');
+        return Container(
+            padding: const EdgeInsets.all(2.0),
+            child: Text('Multiple choice flows here'));
       case 'dropdownChoiceGroup':
-        return Text('Dropdown choice flows here');
+        return Container(
+            padding: const EdgeInsets.all(2.0),
+            child: Text('Dropdown choice flows here'));
       default:
         debugPrint('Invalid or not implemented response component');
         return null;
