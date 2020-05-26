@@ -10,7 +10,7 @@ class SurveySingleItem extends StatefulWidget {
   SurveySingleItem({Key key, this.title}) : super(key: key);
 
   final String title;
-  final surveySingleItem = qp[1];
+  final surveySingleItem = qp[3];
 
   @override
   _SurveySingleItemState createState() => _SurveySingleItemState();

@@ -3,6 +3,7 @@ import 'package:input_widgets/ui/components/display_component/error_item.dart';
 import 'package:input_widgets/ui/components/display_component/text_item.dart';
 import 'package:input_widgets/ui/components/display_component/warning_item.dart';
 import 'package:input_widgets/ui/components/group_component/response_group.dart';
+import 'package:input_widgets/ui/components/response_component/drop_down_group.dart';
 import 'package:input_widgets/ui/components/response_component/input.dart';
 import 'package:input_widgets/ui/components/response_component/multiline_input.dart';
 import 'package:input_widgets/ui/components/response_component/multiple_choice_group.dart';
@@ -70,10 +71,10 @@ class WidgetUtils {
             padding: const EdgeInsets.all(2.0),
             child: MultipleChoiceGroup(
                 multipleChoiceGroupComponent: responseComponent));
-      case 'dropdownChoiceGroup':
+      case 'dropDownGroup':
         return Container(
             padding: const EdgeInsets.all(2.0),
-            child: Text('Dropdown choice flows here'));
+            child: DropDownGroup(dropDownGroupComponent: responseComponent));
       default:
         debugPrint('Invalid or not implemented response component');
         return null;
