@@ -1,31 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:input_widgets/ui/common/themes/influenzanet-theme.dart';
 
-class ThemedTextFormField extends TextFormField {
-  ThemedTextFormField(
-      {String initialValue,
-      String hintText,
-      bool obscureText = false,
-      TextInputType keyboardType,
+class MultilineInput extends TextField {
+  MultilineInput(
+      {String hintText,
+      int maxlines,
       bool readOnly: false,
       bool autocorrect: false})
       : super(
-          initialValue: initialValue,
-          style: ThemeElements.bigButtonTextStyle,
+          style: ThemeElements.longTextFormFieldTextStyle,
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle: ThemeElements.bigButtonTextStyle,
-            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+            hintStyle: ThemeElements.longTextFormFieldTextStyle,
+            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
             filled: true,
             focusColor: ThemeElements.primaryColorLight,
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(100),
+              borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide.none,
             ),
           ),
-          obscureText: obscureText,
-          keyboardType: keyboardType,
+          keyboardType: TextInputType.multiline,
           keyboardAppearance: Brightness.light,
+          maxLines: maxlines,
           readOnly: readOnly,
           autocorrect: autocorrect,
         );

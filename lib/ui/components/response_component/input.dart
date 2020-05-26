@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:input_widgets/ui/common/themes/influenzanet-theme.dart';
 
-class ThemedNumberFormField extends TextFormField {
-  ThemedNumberFormField(
+class Input extends TextFormField {
+  Input(
       {String initialValue,
       String hintText,
       bool obscureText = false,
-      TextInputType keyboardType = TextInputType.number,
+      TextInputType keyboardType,
       bool readOnly: false,
       bool autocorrect: false})
       : super(

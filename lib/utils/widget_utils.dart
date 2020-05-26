@@ -3,9 +3,10 @@ import 'package:input_widgets/ui/components/display_component/error_item.dart';
 import 'package:input_widgets/ui/components/display_component/text_item.dart';
 import 'package:input_widgets/ui/components/display_component/warning_item.dart';
 import 'package:input_widgets/ui/components/group_component/response_group.dart';
-import 'package:input_widgets/ui/components/response_component/themed-long-text-form-field.dart';
-import 'package:input_widgets/ui/components/response_component/themed-number-form-field.dart';
-import 'package:input_widgets/ui/components/response_component/themed-text-form-field.dart';
+import 'package:input_widgets/ui/components/response_component/input.dart';
+import 'package:input_widgets/ui/components/response_component/multiline_input.dart';
+import 'package:input_widgets/ui/components/response_component/number_input.dart';
+import 'package:input_widgets/ui/components/response_component/single_choice_group.dart';
 import 'package:input_widgets/utils/utils.dart';
 
 class WidgetUtils {
@@ -48,22 +49,21 @@ class WidgetUtils {
       case 'input':
         return Container(
             padding: const EdgeInsets.all(2.0),
-            child: ThemedTextFormField(
-                hintText: Utils.getContent(responseComponent)));
+            child: Input(hintText: Utils.getContent(responseComponent)));
       case 'multilineTextInput':
         return Container(
             padding: const EdgeInsets.all(2.0),
-            child: ThemedLongTextFormField(
-                hintText: Utils.getContent(responseComponent)));
+            child:
+                MultilineInput(hintText: Utils.getContent(responseComponent)));
       case 'numberInput':
         return Container(
             padding: const EdgeInsets.all(2.0),
-            child: ThemedNumberFormField(
-                hintText: Utils.getContent(responseComponent)));
+            child: NumberInput(hintText: Utils.getContent(responseComponent)));
       case 'singleChoiceGroup':
         return Container(
             padding: const EdgeInsets.all(2.0),
-            child: Text('Single choice flows here'));
+            child: SingleChoiceGroup(
+                singleChoiceGroupComponent: responseComponent));
       case 'multipleChoiceGroup':
         return Container(
             padding: const EdgeInsets.all(2.0),
@@ -72,6 +72,21 @@ class WidgetUtils {
         return Container(
             padding: const EdgeInsets.all(2.0),
             child: Text('Dropdown choice flows here'));
+      default:
+        debugPrint('Invalid or not implemented response component');
+        return null;
+    }
+  }
+
+  static Widget classifySingleChoiceGroupComponent(dynamic choiceComponent) {
+    switch (choiceComponent['role']) {
+      case 'option':
+        return Text(Utils.getContent(choiceComponent),
+            textAlign: TextAlign.left);
+      case 'input':
+        return Input(hintText: Utils.getContent(choiceComponent));
+      case 'numberInput':
+        return NumberInput(hintText: Utils.getContent(choiceComponent));
       default:
         debugPrint('Invalid or not implemented response component');
         return null;

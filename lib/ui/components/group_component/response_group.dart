@@ -14,7 +14,6 @@ class _ResponseComponentState extends State<ResponseComponent> {
   @override
   void initState() {
     responseComponent = widget.responseComponent;
-    debugPrint('Response body:\n' + responseComponent.toString());
     super.initState();
   }
 
