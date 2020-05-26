@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:input_widgets/utils/utils.dart';
 
 class WarningItem extends StatelessWidget {
-  final String text;
-  const WarningItem({Key key, this.text}) : super(key: key);
+  final dynamic warningComponent;
+  const WarningItem({Key key, this.warningComponent}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Text(this.text, style: TextStyle(color: Colors.orange));
+    return Text(Utils.getContent(this.warningComponent),
+        style: TextStyle(color: Colors.orange));
   }
 }

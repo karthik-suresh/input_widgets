@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:input_widgets/utils/utils.dart';
 
 class ErrorItem extends StatelessWidget {
-  final String text;
-  const ErrorItem({Key key, this.text}) : super(key: key);
+  final dynamic errorComponent;
+  const ErrorItem({Key key, this.errorComponent}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Text(this.text, style: TextStyle(color: Colors.red));
+    return Text(Utils.getContent(this.errorComponent),
+        style: TextStyle(color: Colors.red));
   }
 }

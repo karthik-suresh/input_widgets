@@ -19,18 +19,18 @@ class WidgetUtils {
       case 'text':
         return Container(
           padding: const EdgeInsets.all(2.0),
-          child: TextItem(text: 'Text flows here'),
+          child: TextItem(textComponent: itemComponent),
         );
       case 'error':
         return Container(
           padding: const EdgeInsets.all(2.0),
-          child: ErrorItem(text: 'Error flows here'),
+          child: ErrorItem(errorComponent: itemComponent),
         );
 
       case 'warning':
         return Container(
           padding: const EdgeInsets.all(2.0),
-          child: WarningItem(text: 'Warning flows here'),
+          child: WarningItem(warningComponent: itemComponent),
         );
 
       default:
