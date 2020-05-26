@@ -14,14 +14,13 @@ class _BodyState extends State<Body> {
   @override
   void initState() {
     bodyComponent = widget.bodyComponent;
-    debugPrint('Item body:\n' + bodyComponent.toString());
     super.initState();
   }
 
   List<Widget> bodyItemsWidget(List itemList) {
     List<Widget> result = [];
     itemList.forEach((item) {
-      Widget itemWidget = WidgetUtils.classify(item);
+      Widget itemWidget = WidgetUtils.classifyRootComponent(item);
       if (itemWidget != null) {
         result.add(itemWidget);
       }
@@ -32,7 +31,7 @@ class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(12.0),
+      padding: const EdgeInsets.all(6.0),
       child: SingleChildScrollView(
         child: ListBody(
           children: bodyItemsWidget(bodyComponent),
