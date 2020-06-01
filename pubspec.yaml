@@ -31,8 +31,8 @@ dev_dependencies:
     sdk: flutter
   test: ^1.6.0
 
-  # survey_engine.dart:
-  #   path: C:\src\ananth\dart_projects\survey-engine.dart\
+  survey_engine.dart:
+    path: C:\src\ananth\dart_projects\survey-engine.dart\
 
 
 # For information on the generic Dart part of this file, see the

@@ -89,6 +89,20 @@ const qp = [
           "key": "1",
           "items": [
             {
+              "role": "input",
+              "content": [
+                {
+                  "code": "en",
+                  "parts": ["Other: "]
+                },
+                {
+                  "code": "de",
+                  "parts": ["Andere:"]
+                }
+              ],
+              "key": "1.1.0"
+            },
+            {
               "role": "singleChoiceGroup",
               "key": "1.1",
               "items": [

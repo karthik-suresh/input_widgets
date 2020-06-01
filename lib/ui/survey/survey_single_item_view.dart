@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:input_widgets/models/response.dart';
 import 'package:input_widgets/ui/common/widgets/app-bars/themed-app-bar.dart';
 import 'package:input_widgets/ui/common/widgets/buttons/themed-primary-button.dart';
 import 'package:input_widgets/ui/survey/body_component.dart';
 import 'package:input_widgets/ui/survey/question.dart';
 import 'package:input_widgets/utils/utils.dart';
+import 'package:provider/provider.dart';
 
 class SurveySingleItemWidget extends StatefulWidget {
   SurveySingleItemWidget({Key key, this.title, this.surveySingleItem})
@@ -107,7 +109,9 @@ class _SurveySingleItemWidgetState extends State<SurveySingleItemWidget> {
                     padding: const EdgeInsets.all(12.0),
                     child: Question(questionComponent: question),
                   ),
-                  Body(bodyComponent: bodyComponent),
+                  ChangeNotifierProvider(
+                      create: (context) => ResponseModel(),
+                      child: Body(bodyComponent: bodyComponent)),
                   Container(
                     padding: const EdgeInsets.all(12.0),
                     child: Builder(

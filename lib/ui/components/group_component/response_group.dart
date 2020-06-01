@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:input_widgets/models/response.dart';
 import 'package:input_widgets/utils/widget_utils.dart';
+import 'package:provider/provider.dart';
 
 class ResponseComponent extends StatefulWidget {
   final dynamic responseComponent;
@@ -15,6 +17,19 @@ class _ResponseComponentState extends State<ResponseComponent> {
   void initState() {
     responseComponent = widget.responseComponent;
     super.initState();
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => initialiseResponseRoot(context));
+  }
+
+  void initialiseResponseRoot(BuildContext context) {
+    List responseList = [];
+    List itemList = responseComponent['items'];
+    itemList.forEach((item) {
+      responseList.add({'key': item['key'], 'items': []});
+    });
+    dynamic result = {'key': responseComponent['key'], 'items': responseList};
+
+    Provider.of<ResponseModel>(context, listen: false).setResponseItem(result);
   }
 
   List<Widget> responseItemsWidget(List itemList) {
@@ -33,10 +48,9 @@ class _ResponseComponentState extends State<ResponseComponent> {
     return Container(
       padding: const EdgeInsets.all(2.0),
       child: SingleChildScrollView(
-        child: ListBody(
-          children: responseItemsWidget(responseComponent['items']),
-        ),
-      ),
+          child: ListBody(
+        children: responseItemsWidget(responseComponent['items']),
+      )),
     );
   }
 }

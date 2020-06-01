@@ -80,33 +80,33 @@ class Utils {
   //   return questions;
   // }
 
-  static getContentListByRole(List itemComponents, String role,
-      {String code = "en"}) {
-    List<String> contentList = [];
-    if (itemComponents == null) {
-      return null;
-    }
-    List componentsByRole =
-        getListItemComponentsByRole(itemComponents, role, code: code);
-    componentsByRole.forEach((component) {
-      contentList.add(getPartsByCode(component['content'], code: code));
-    });
-    return contentList;
-  }
+  // static getContentListByRole(List itemComponents, String role,
+  //     {String code = "en"}) {
+  //   List<String> contentList = [];
+  //   if (itemComponents == null) {
+  //     return null;
+  //   }
+  //   List componentsByRole =
+  //       getListItemComponentsByRole(itemComponents, role, code: code);
+  //   componentsByRole.forEach((component) {
+  //     contentList.add(getPartsByCode(component['content'], code: code));
+  //   });
+  //   return contentList;
+  // }
 
-  static getHelpGroupContents(List itemComponents, {String code = "en"}) {
-    return getContentListByRole(itemComponents, 'text', code: code);
-  }
+  // static getHelpGroupContents(List itemComponents, {String code = "en"}) {
+  //   return getContentListByRole(itemComponents, 'text', code: code);
+  // }
 
-  static getHelpGroupList(List surveySingleItem, {String code = "en"}) {
-    List<List<String>> helpList = [];
-    surveySingleItem.forEach((question) {
-      dynamic helpGroup = getSingleItemComponentsByRole(
-          question['components']['items'], 'helpGroup');
-      List<String> contents = getHelpGroupContents(helpGroup['items']);
-      helpList.add(contents);
-      print('here');
-    });
-    return helpList;
-  }
+  // static getHelpGroupList(List surveySingleItem, {String code = "en"}) {
+  //   List<List<String>> helpList = [];
+  //   surveySingleItem.forEach((question) {
+  //     dynamic helpGroup = getSingleItemComponentsByRole(
+  //         question['components']['items'], 'helpGroup');
+  //     List<String> contents = getHelpGroupContents(helpGroup['items']);
+  //     helpList.add(contents);
+  //     print('here');
+  //   });
+  //   return helpList;
+  // }
 }

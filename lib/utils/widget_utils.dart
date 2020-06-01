@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:input_widgets/models/response.dart';
 import 'package:input_widgets/ui/components/display_component/error_item.dart';
 import 'package:input_widgets/ui/components/display_component/text_item.dart';
 import 'package:input_widgets/ui/components/display_component/warning_item.dart';
@@ -10,6 +11,7 @@ import 'package:input_widgets/ui/components/response_component/multiple_choice_g
 import 'package:input_widgets/ui/components/response_component/number_input.dart';
 import 'package:input_widgets/ui/components/response_component/single_choice_group.dart';
 import 'package:input_widgets/utils/utils.dart';
+import 'package:provider/provider.dart';
 
 class WidgetUtils {
   static Widget classifyRootComponent(dynamic itemComponent) {
@@ -21,7 +23,9 @@ class WidgetUtils {
       case 'responseGroup':
         return Container(
           padding: const EdgeInsets.all(2.0),
-          child: ResponseComponent(responseComponent: itemComponent),
+          child: Consumer<ResponseModel>(
+              builder: (context, response, child) =>
+                  ResponseComponent(responseComponent: itemComponent)),
         );
       case 'text':
         return Container(
