@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:input_widgets/models/flattened_rendered.dart';
 import 'package:input_widgets/ui/common/widgets/app-bars/themed-app-bar.dart';
 import 'package:input_widgets/ui/common/widgets/buttons/themed-primary-button.dart';
 import 'package:input_widgets/ui/survey/body_component.dart';
 import 'package:input_widgets/ui/survey/question.dart';
 import 'package:input_widgets/utils/utils.dart';
 
-class SurveySingleItem extends StatefulWidget {
-  SurveySingleItem({Key key, this.title}) : super(key: key);
+class SurveySingleItemWidget extends StatefulWidget {
+  SurveySingleItemWidget({Key key, this.title, this.surveySingleItem})
+      : super(key: key);
 
   final String title;
-  final surveySingleItem = qp[3];
+  final dynamic surveySingleItem;
 
   @override
-  _SurveySingleItemState createState() => _SurveySingleItemState();
+  _SurveySingleItemWidgetState createState() => _SurveySingleItemWidgetState();
 }
 
-class _SurveySingleItemState extends State<SurveySingleItem> {
+class _SurveySingleItemWidgetState extends State<SurveySingleItemWidget> {
   dynamic surveySingleItem;
   dynamic question;
   dynamic helpGroup;

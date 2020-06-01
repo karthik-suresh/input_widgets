@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:input_widgets/models/response.dart';
 import 'package:input_widgets/utils/utils.dart';
 import 'package:input_widgets/utils/widget_utils.dart';
+import 'package:provider/provider.dart';
 
 class SingleChoiceGroup extends StatefulWidget {
   final dynamic singleChoiceGroupComponent;
@@ -24,16 +26,19 @@ class _SingleChoiceGroupState extends State<SingleChoiceGroup> {
   List<Widget> choiceItemsWidget(List itemList) {
     List<Widget> result = [];
     itemList.forEach((item) {
-      Widget itemWidget = RadioListTile(
-        groupValue: optionValue,
-        title: WidgetUtils.classifySingleChoiceGroupComponent(item),
-        value: Utils.getContent(item),
-        onChanged: (val) {
-          setState(() {
-            debugPrint('Selected value = $val');
-            optionValue = val;
-          });
-        },
+      Widget itemWidget = Consumer<ResponseModel>(
+        builder: (context, response, child) => RadioListTile(
+          groupValue: optionValue,
+          title: WidgetUtils.classifySingleChoiceGroupComponent(item),
+          value: Utils.getContent(item),
+          onChanged: (val) {
+            setState(() {
+              debugPrint('Selected value = $val');
+              optionValue = val;
+              Provider.of<ResponseModel>(context, listen: false).response(val);
+            });
+          },
+        ),
       );
       if (itemWidget != null) {
         result.add(itemWidget);
@@ -47,8 +52,11 @@ class _SingleChoiceGroupState extends State<SingleChoiceGroup> {
     return Container(
       padding: const EdgeInsets.all(2.0),
       child: SingleChildScrollView(
-        child: ListBody(
-          children: choiceItemsWidget(singleChoiceGroupComponent['items']),
+        child: ChangeNotifierProvider(
+          create: (context) => ResponseModel(),
+          child: ListBody(
+            children: choiceItemsWidget(singleChoiceGroupComponent['items']),
+          ),
         ),
       ),
     );
