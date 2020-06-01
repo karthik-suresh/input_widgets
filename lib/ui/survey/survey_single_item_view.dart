@@ -123,6 +123,7 @@ class _SurveySingleItemWidgetState extends State<SurveySingleItemWidget> {
                           if (_formKey.currentState.validate()) {
                             Scaffold.of(context).showSnackBar(SnackBar(
                                 content: Text('Fetching next Survey Item')));
+                            _formKey.currentState.save();
                           }
                         },
                       ),

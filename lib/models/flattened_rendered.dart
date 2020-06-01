@@ -102,147 +102,147 @@ const qp = [
               ],
               "key": "1.1.0"
             },
-            {
-              "role": "singleChoiceGroup",
-              "key": "1.1",
-              "items": [
-                {
-                  "role": "option",
-                  "content": [
-                    {
-                      "code": "en",
-                      "parts": ["Paid employment, full-time"]
-                    },
-                    {
-                      "code": "de",
-                      "parts": ["Bezahlte Beschäftigung, Vollzeit"]
-                    }
-                  ],
-                  "key": "1.1.1"
-                },
-                {
-                  "role": "option",
-                  "content": [
-                    {
-                      "code": "en",
-                      "parts": ["Paid employment, part-time"]
-                    },
-                    {
-                      "code": "de",
-                      "parts": ["Bezahlte Beschäftigung, Teilzeit"]
-                    }
-                  ],
-                  "key": "1.1.2"
-                },
-                {
-                  "role": "option",
-                  "content": [
-                    {
-                      "code": "en",
-                      "parts": [
-                        "Self-employed (businessman, farmer, tradesman, etc)"
-                      ]
-                    },
-                    {
-                      "code": "de",
-                      "parts": [
-                        "Selbstständige (Geschäftsleute, Landwirte, Handwerker usw.)"
-                      ]
-                    }
-                  ],
-                  "key": "1.1.3"
-                },
-                {
-                  "role": "option",
-                  "content": [
-                    {
-                      "code": "en",
-                      "parts": ["Attending daycare/school/college/university"]
-                    },
-                    {
-                      "code": "de",
-                      "parts": [
-                        "Besuch von Kindertagesstätten/Schulen/Hochschulen/Universitäten"
-                      ]
-                    }
-                  ],
-                  "key": "1.1.4"
-                },
-                {
-                  "role": "option",
-                  "content": [
-                    {
-                      "code": "en",
-                      "parts": ["Home-maker (e.g. housewife)"]
-                    },
-                    {
-                      "code": "de",
-                      "parts": ["Haushaltsführung (z.B. Hausfrau)"]
-                    }
-                  ],
-                  "key": "1.1.5"
-                },
-                {
-                  "role": "option",
-                  "content": [
-                    {
-                      "code": "en",
-                      "parts": ["Unemployed"]
-                    },
-                    {
-                      "code": "de",
-                      "parts": ["Arbeitslos"]
-                    }
-                  ],
-                  "key": "1.1.6"
-                },
-                {
-                  "role": "option",
-                  "content": [
-                    {
-                      "code": "en",
-                      "parts": ["Long-term sick-leave or parental leave"]
-                    },
-                    {
-                      "code": "de",
-                      "parts": [
-                        "Langfristiger Krankheitsurlaub oder Elternurlaub"
-                      ]
-                    }
-                  ],
-                  "key": "1.1.7"
-                },
-                {
-                  "role": "option",
-                  "content": [
-                    {
-                      "code": "en",
-                      "parts": ["Retired"]
-                    },
-                    {
-                      "code": "de",
-                      "parts": ["Im Ruhestand"]
-                    }
-                  ],
-                  "key": "1.1.8"
-                },
-                {
-                  "role": "option",
-                  "content": [
-                    {
-                      "code": "en",
-                      "parts": ["Other"]
-                    },
-                    {
-                      "code": "de",
-                      "parts": ["Sonstige"]
-                    }
-                  ],
-                  "key": "1.1.9"
-                }
-              ],
-              "order": {"name": "sequential"}
-            },
+            // {
+            //   "role": "singleChoiceGroup",
+            //   "key": "1.1",
+            //   "items": [
+            //     {
+            //       "role": "option",
+            //       "content": [
+            //         {
+            //           "code": "en",
+            //           "parts": ["Paid employment, full-time"]
+            //         },
+            //         {
+            //           "code": "de",
+            //           "parts": ["Bezahlte Beschäftigung, Vollzeit"]
+            //         }
+            //       ],
+            //       "key": "1.1.1"
+            //     },
+            //     {
+            //       "role": "option",
+            //       "content": [
+            //         {
+            //           "code": "en",
+            //           "parts": ["Paid employment, part-time"]
+            //         },
+            //         {
+            //           "code": "de",
+            //           "parts": ["Bezahlte Beschäftigung, Teilzeit"]
+            //         }
+            //       ],
+            //       "key": "1.1.2"
+            //     },
+            //     {
+            //       "role": "option",
+            //       "content": [
+            //         {
+            //           "code": "en",
+            //           "parts": [
+            //             "Self-employed (businessman, farmer, tradesman, etc)"
+            //           ]
+            //         },
+            //         {
+            //           "code": "de",
+            //           "parts": [
+            //             "Selbstständige (Geschäftsleute, Landwirte, Handwerker usw.)"
+            //           ]
+            //         }
+            //       ],
+            //       "key": "1.1.3"
+            //     },
+            //     {
+            //       "role": "option",
+            //       "content": [
+            //         {
+            //           "code": "en",
+            //           "parts": ["Attending daycare/school/college/university"]
+            //         },
+            //         {
+            //           "code": "de",
+            //           "parts": [
+            //             "Besuch von Kindertagesstätten/Schulen/Hochschulen/Universitäten"
+            //           ]
+            //         }
+            //       ],
+            //       "key": "1.1.4"
+            //     },
+            //     {
+            //       "role": "option",
+            //       "content": [
+            //         {
+            //           "code": "en",
+            //           "parts": ["Home-maker (e.g. housewife)"]
+            //         },
+            //         {
+            //           "code": "de",
+            //           "parts": ["Haushaltsführung (z.B. Hausfrau)"]
+            //         }
+            //       ],
+            //       "key": "1.1.5"
+            //     },
+            //     {
+            //       "role": "option",
+            //       "content": [
+            //         {
+            //           "code": "en",
+            //           "parts": ["Unemployed"]
+            //         },
+            //         {
+            //           "code": "de",
+            //           "parts": ["Arbeitslos"]
+            //         }
+            //       ],
+            //       "key": "1.1.6"
+            //     },
+            //     {
+            //       "role": "option",
+            //       "content": [
+            //         {
+            //           "code": "en",
+            //           "parts": ["Long-term sick-leave or parental leave"]
+            //         },
+            //         {
+            //           "code": "de",
+            //           "parts": [
+            //             "Langfristiger Krankheitsurlaub oder Elternurlaub"
+            //           ]
+            //         }
+            //       ],
+            //       "key": "1.1.7"
+            //     },
+            //     {
+            //       "role": "option",
+            //       "content": [
+            //         {
+            //           "code": "en",
+            //           "parts": ["Retired"]
+            //         },
+            //         {
+            //           "code": "de",
+            //           "parts": ["Im Ruhestand"]
+            //         }
+            //       ],
+            //       "key": "1.1.8"
+            //     },
+            //     {
+            //       "role": "option",
+            //       "content": [
+            //         {
+            //           "code": "en",
+            //           "parts": ["Other"]
+            //         },
+            //         {
+            //           "code": "de",
+            //           "parts": ["Sonstige"]
+            //         }
+            //       ],
+            //       "key": "1.1.9"
+            //     }
+            //   ],
+            //   "order": {"name": "sequential"}
+            // },
           ],
           "order": {"name": "sequential"}
         }

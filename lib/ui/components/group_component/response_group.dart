@@ -28,7 +28,6 @@ class _ResponseComponentState extends State<ResponseComponent> {
       responseList.add({'key': item['key'], 'items': []});
     });
     dynamic result = {'key': responseComponent['key'], 'items': responseList};
-
     Provider.of<ResponseModel>(context, listen: false).setResponseItem(result);
   }
 
