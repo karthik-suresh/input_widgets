@@ -16,6 +16,12 @@ class ResponseModel with ChangeNotifier {
     notifyListeners();
   }
 
+  void initResponseItem(dynamic response) {
+    responseItem = ResponseItem.fromMap(response);
+    debugPrint('Response init=' + responseItem.toJson());
+    notifyListeners();
+  }
+
   void response(String val) {
     value = val;
     debugPrint("Value at parent=" + val);

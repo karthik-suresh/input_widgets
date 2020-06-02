@@ -55,16 +55,21 @@ class WidgetUtils {
       case 'input':
         return Container(
             padding: const EdgeInsets.all(2.0),
-            child: Input(hintText: Utils.getContent(responseComponent)));
+            child: Input(
+                hintText: Utils.getContent(responseComponent),
+                itemKey: responseComponent['key']));
       case 'multilineTextInput':
         return Container(
             padding: const EdgeInsets.all(2.0),
-            child:
-                MultilineInput(hintText: Utils.getContent(responseComponent)));
+            child: MultilineInput(
+                hintText: Utils.getContent(responseComponent),
+                itemKey: responseComponent['key']));
       case 'numberInput':
         return Container(
             padding: const EdgeInsets.all(2.0),
-            child: NumberInput(hintText: Utils.getContent(responseComponent)));
+            child: NumberInput(
+                hintText: Utils.getContent(responseComponent),
+                itemKey: responseComponent['key']));
       case 'singleChoiceGroup':
         return Container(
             padding: const EdgeInsets.all(2.0),

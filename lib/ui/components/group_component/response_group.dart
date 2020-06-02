@@ -25,10 +25,15 @@ class _ResponseComponentState extends State<ResponseComponent> {
     List responseList = [];
     List itemList = responseComponent['items'];
     itemList.forEach((item) {
-      responseList.add({'key': item['key'], 'items': []});
+      switch (item['role']) {
+        case 'singleChoiceGroup':
+        case 'multipleChoiceGroup':
+        case 'dropDownGroup':
+          responseList.add({'key': item['key'], 'items': []});
+      }
     });
     dynamic result = {'key': responseComponent['key'], 'items': responseList};
-    Provider.of<ResponseModel>(context, listen: false).setResponseItem(result);
+    Provider.of<ResponseModel>(context, listen: false).initResponseItem(result);
   }
 
   List<Widget> responseItemsWidget(List itemList) {

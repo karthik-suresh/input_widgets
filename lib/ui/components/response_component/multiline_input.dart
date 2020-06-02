@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:input_widgets/models/response.dart';
 import 'package:input_widgets/ui/common/themes/influenzanet-theme.dart';
+import 'package:input_widgets/utils/utils.dart';
+import 'package:provider/provider.dart';
 
 class MultilineInput extends StatefulWidget {
   final String text;
   final String hintText;
+  final String itemKey;
 
-  MultilineInput({this.text, this.hintText});
+  MultilineInput({this.text, this.hintText, this.itemKey});
   @override
   _MultilineInputState createState() => _MultilineInputState();
 }
@@ -13,12 +17,14 @@ class MultilineInput extends StatefulWidget {
 class _MultilineInputState extends State<MultilineInput> {
   String text;
   String hintText;
+  String itemKey;
   final myController = TextEditingController();
 
   @override
   void initState() {
     text = widget.text;
     hintText = widget.hintText;
+    itemKey = widget.itemKey;
     super.initState();
   }
 
@@ -33,6 +39,11 @@ class _MultilineInputState extends State<MultilineInput> {
     return TextFormField(
       onSaved: (String value) {
         debugPrint('MultilineInput saved');
+        ResponseModel responseModel =
+            Provider.of<ResponseModel>(context, listen: false);
+        dynamic response = Utils.constructSingleResponseItem(
+            itemKey, value, responseModel.getResponseItem());
+        responseModel.setResponseItem(response);
       },
       controller: myController,
       style: ThemeElements.longTextFormFieldTextStyle,

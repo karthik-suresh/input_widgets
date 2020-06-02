@@ -1,3 +1,5 @@
+import 'package:survey_engine.dart/api/api.dart';
+
 class Utils {
   // The function will be replaced by api fetched from backend
   static List<dynamic> getFlattenedRenderedSurvey(dynamic questionGroup,
@@ -68,6 +70,14 @@ class Utils {
         ? 'No content found'
         : localisedObject['parts'].join();
     return parts;
+  }
+
+  static constructSingleResponseItem(
+      String key, String value, ResponseItem responseItem) {
+    dynamic response = responseItem.toMap();
+    dynamic newResponse = {'key': key, 'value': value};
+    response['items'].add(newResponse);
+    return response;
   }
 
   // static getQuestionList(List surveySingleItem, {String code = "en"}) {

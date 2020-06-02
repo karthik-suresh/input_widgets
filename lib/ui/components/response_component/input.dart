@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:input_widgets/models/response.dart';
 import 'package:input_widgets/ui/common/themes/influenzanet-theme.dart';
+import 'package:input_widgets/utils/utils.dart';
+import 'package:provider/provider.dart';
 
 class Input extends StatefulWidget {
   final String text;
   final String hintText;
+  final String itemKey;
 
-  Input({this.text, this.hintText});
+  Input({this.text, this.hintText, this.itemKey});
   @override
   _InputState createState() => _InputState();
 }
@@ -13,12 +17,14 @@ class Input extends StatefulWidget {
 class _InputState extends State<Input> {
   String text;
   String hintText;
+  String itemKey;
   final myController = TextEditingController();
 
   @override
   void initState() {
     text = widget.text;
     hintText = widget.hintText;
+    itemKey = widget.itemKey;
     super.initState();
   }
 
@@ -33,7 +39,12 @@ class _InputState extends State<Input> {
     // Use myController.text to get the text value
     return TextFormField(
       onSaved: (String value) {
-        debugPrint('Input saved' + value);
+        debugPrint('Input saved: ' + value);
+        ResponseModel responseModel =
+            Provider.of<ResponseModel>(context, listen: false);
+        dynamic response = Utils.constructSingleResponseItem(
+            itemKey, value, responseModel.getResponseItem());
+        responseModel.setResponseItem(response);
       },
       controller: myController,
       style: ThemeElements.bigButtonTextStyle,
