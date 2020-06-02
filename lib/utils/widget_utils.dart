@@ -84,7 +84,9 @@ class WidgetUtils {
       case 'dropDownGroup':
         return Container(
             padding: const EdgeInsets.all(2.0),
-            child: DropDownGroup(dropDownGroupComponent: responseComponent));
+            child: DropDownGroup(
+                dropDownGroupComponent: responseComponent,
+                itemKey: responseComponent['key']));
       default:
         debugPrint('Invalid or not implemented response component');
         return null;

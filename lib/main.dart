@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SurveySingleItemModel surveySingleItemModel =
-        SurveySingleItemModel(surveySingleItem: qp[0]);
+        SurveySingleItemModel(surveySingleItem: qp[3]);
     return MaterialApp(
       title: 'Influenzanet Survey',
       theme: influenzaNetTheme,

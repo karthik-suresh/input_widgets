@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:input_widgets/models/response.dart';
 import 'package:input_widgets/utils/utils.dart';
+import 'package:provider/provider.dart';
 
 class DropDownGroup extends StatefulWidget {
   final dynamic dropDownGroupComponent;
-  DropDownGroup({Key key, this.dropDownGroupComponent}) : super(key: key);
+  final String itemKey;
+  DropDownGroup({Key key, this.dropDownGroupComponent, this.itemKey})
+      : super(key: key);
 
   @override
   _DropDownGroupState createState() => _DropDownGroupState();
@@ -12,10 +16,12 @@ class DropDownGroup extends StatefulWidget {
 class _DropDownGroupState extends State<DropDownGroup> {
   String optionValue;
   dynamic dropDownGroupComponent;
+  String itemKey;
 
   @override
   void initState() {
     dropDownGroupComponent = widget.dropDownGroupComponent;
+    itemKey = widget.itemKey;
     super.initState();
   }
 
@@ -23,7 +29,7 @@ class _DropDownGroupState extends State<DropDownGroup> {
     List<DropdownMenuItem<String>> result = [];
     itemList.forEach((item) {
       DropdownMenuItem<String> itemWidget = DropdownMenuItem<String>(
-        value: Utils.getContent(item),
+        value: item['key'],
         child: Text(Utils.getContent(item), textAlign: TextAlign.center),
       );
       if (itemWidget != null) {
@@ -46,9 +52,17 @@ class _DropDownGroupState extends State<DropDownGroup> {
               height: 2,
               color: Colors.black87,
             ),
-            onChanged: (String newValue) {
+            onChanged: (newValue) {
               setState(() {
                 optionValue = newValue;
+                debugPrint('value=' + newValue);
+                ResponseModel responseModel =
+                    Provider.of<ResponseModel>(context, listen: false);
+                dynamic response = Utils.constructSingleChoiceGroupItem(
+                    groupKey: itemKey,
+                    key: newValue,
+                    responseItem: responseModel.getResponseItem());
+                responseModel.setResponseItem(response);
               });
             },
             items: choiceItemsWidget(dropDownGroupComponent['items']),
