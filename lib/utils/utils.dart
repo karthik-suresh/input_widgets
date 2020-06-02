@@ -90,6 +90,16 @@ class Utils {
     return response;
   }
 
+  static constructMultipleChoiceGroupItem(
+      {String groupKey, List keys, List values, ResponseItem responseItem}) {
+    dynamic response = responseItem.toMap();
+    List newResponse = keys.map((key) => {'key': key.toString()}).toList();
+    int position =
+        response['items'].indexWhere((item) => item['key'] == groupKey);
+    response['items'][position]['items'] = newResponse;
+    return response;
+  }
+
   // static getQuestionList(List surveySingleItem, {String code = "en"}) {
   //   List<String> questions = [];
   //   surveySingleItem.forEach((item) {

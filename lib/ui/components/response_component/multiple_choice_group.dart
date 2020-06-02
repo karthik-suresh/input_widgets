@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:input_widgets/models/response.dart';
 import 'package:input_widgets/utils/utils.dart';
 import 'package:input_widgets/utils/widget_utils.dart';
+import 'package:provider/provider.dart';
 
 class MultipleChoiceGroup extends StatefulWidget {
   final dynamic multipleChoiceGroupComponent;
-  MultipleChoiceGroup({Key key, this.multipleChoiceGroupComponent})
+  final String itemKey;
+  MultipleChoiceGroup(
+      {Key key, this.multipleChoiceGroupComponent, this.itemKey})
       : super(key: key);
 
   @override
@@ -13,15 +17,18 @@ class MultipleChoiceGroup extends StatefulWidget {
 
 class _MultipleChoiceGroupState extends State<MultipleChoiceGroup> {
   Map<String, bool> optionValues = {};
+  String itemKey;
+
   dynamic multipleChoiceGroupComponent;
   List choiceList;
 
   @override
   void initState() {
     multipleChoiceGroupComponent = widget.multipleChoiceGroupComponent;
+    itemKey = widget.itemKey;
     choiceList = multipleChoiceGroupComponent['items'];
     choiceList.forEach((item) {
-      String key = Utils.getContent(item);
+      String key = item['key'];
       optionValues[key] = false;
     });
     super.initState();
@@ -30,7 +37,7 @@ class _MultipleChoiceGroupState extends State<MultipleChoiceGroup> {
   List<Widget> choiceItemsWidget() {
     List<Widget> result = [];
     choiceList.forEach((item) {
-      String key = Utils.getContent(item);
+      String key = item['key'];
       Widget itemWidget = CheckboxListTile(
         controlAffinity: ListTileControlAffinity.leading,
         title: WidgetUtils.classifyMultipleChoiceGroupComponent(item),
@@ -38,6 +45,17 @@ class _MultipleChoiceGroupState extends State<MultipleChoiceGroup> {
         onChanged: (bool value) {
           setState(() {
             optionValues[key] = value;
+            debugPrint(optionValues.toString());
+            ResponseModel responseModel =
+                Provider.of<ResponseModel>(context, listen: false);
+            dynamic response = Utils.constructMultipleChoiceGroupItem(
+                groupKey: itemKey,
+                keys: optionValues.keys
+                    .where((k) => optionValues[k] == true)
+                    .toList(),
+                responseItem: responseModel.getResponseItem());
+
+            responseModel.setResponseItem(response);
           });
         },
       );

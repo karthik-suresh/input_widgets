@@ -80,7 +80,8 @@ class WidgetUtils {
         return Container(
             padding: const EdgeInsets.all(2.0),
             child: MultipleChoiceGroup(
-                multipleChoiceGroupComponent: responseComponent));
+                multipleChoiceGroupComponent: responseComponent,
+                itemKey: responseComponent['key']));
       case 'dropDownGroup':
         return Container(
             padding: const EdgeInsets.all(2.0),
