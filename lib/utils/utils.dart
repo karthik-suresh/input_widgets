@@ -73,10 +73,20 @@ class Utils {
   }
 
   static constructSingleResponseItem(
-      String key, String value, ResponseItem responseItem) {
+      {String key, String value, ResponseItem responseItem}) {
     dynamic response = responseItem.toMap();
     dynamic newResponse = {'key': key, 'value': value};
-    response['items'].add(newResponse);
+    response['items'] = [newResponse];
+    return response;
+  }
+
+  static constructSingleChoiceGroupItem(
+      {String groupKey, String key, String value, ResponseItem responseItem}) {
+    dynamic response = responseItem.toMap();
+    dynamic newResponse = {'key': key, 'value': value};
+    int position =
+        response['items'].indexWhere((item) => item['key'] == groupKey);
+    response['items'][position]['items'] = [newResponse];
     return response;
   }
 

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:input_widgets/models/response.dart';
 import 'package:input_widgets/utils/utils.dart';
 import 'package:input_widgets/utils/widget_utils.dart';
+import 'package:provider/provider.dart';
 
 class SingleChoiceGroup extends StatefulWidget {
   final dynamic singleChoiceGroupComponent;
-  SingleChoiceGroup({Key key, this.singleChoiceGroupComponent})
+  final String itemKey;
+  SingleChoiceGroup({Key key, this.singleChoiceGroupComponent, this.itemKey})
       : super(key: key);
 
   @override
@@ -14,31 +17,37 @@ class SingleChoiceGroup extends StatefulWidget {
 class _SingleChoiceGroupState extends State<SingleChoiceGroup> {
   String optionValue;
   dynamic singleChoiceGroupComponent;
+  String itemKey;
 
   @override
   void initState() {
     singleChoiceGroupComponent = widget.singleChoiceGroupComponent;
+    itemKey = widget.itemKey;
     super.initState();
   }
 
   List<Widget> choiceItemsWidget(List itemList) {
     List<Widget> result = [];
     itemList.forEach((item) {
-      // Widget itemWidget = Consumer<ResponseModel>(
-      //   builder: (context, response, child) =>
       Widget itemWidget = RadioListTile(
         groupValue: optionValue,
         title: WidgetUtils.classifySingleChoiceGroupComponent(item),
-        value: Utils.getContent(item),
+        value: item['key'],
         onChanged: (val) {
-          // Provider.of<ResponseModel>(context, listen: false).response(val);
           setState(() {
             debugPrint('Selected value = $val');
             optionValue = val;
+            ResponseModel responseModel =
+                Provider.of<ResponseModel>(context, listen: false);
+            dynamic response = Utils.constructSingleChoiceGroupItem(
+                groupKey: itemKey,
+                key: val,
+                responseItem: responseModel.getResponseItem());
+            responseModel.setResponseItem(response);
           });
         },
       );
-      //);
+
       if (itemWidget != null) {
         result.add(itemWidget);
       }
@@ -51,12 +60,9 @@ class _SingleChoiceGroupState extends State<SingleChoiceGroup> {
     return Container(
       padding: const EdgeInsets.all(2.0),
       child: SingleChildScrollView(
-        // child: ChangeNotifierProvider(
-        //   create: (context) => ResponseModel(),
         child: ListBody(
           children: choiceItemsWidget(singleChoiceGroupComponent['items']),
         ),
-        //),
       ),
     );
   }

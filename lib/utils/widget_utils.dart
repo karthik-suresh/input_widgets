@@ -74,7 +74,8 @@ class WidgetUtils {
         return Container(
             padding: const EdgeInsets.all(2.0),
             child: SingleChoiceGroup(
-                singleChoiceGroupComponent: responseComponent));
+                singleChoiceGroupComponent: responseComponent,
+                itemKey: responseComponent['key']));
       case 'multipleChoiceGroup':
         return Container(
             padding: const EdgeInsets.all(2.0),

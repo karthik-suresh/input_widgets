@@ -42,7 +42,9 @@ class _NumberInputState extends State<NumberInput> {
         ResponseModel responseModel =
             Provider.of<ResponseModel>(context, listen: false);
         dynamic response = Utils.constructSingleResponseItem(
-            itemKey, value, responseModel.getResponseItem());
+            key: itemKey,
+            value: value,
+            responseItem: responseModel.getResponseItem());
         responseModel.setResponseItem(response);
       },
       controller: myController,
